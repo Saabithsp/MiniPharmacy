@@ -23,7 +23,7 @@ public class PharmacyController {
         String input = "";
 
         while (!input.equalsIgnoreCase("exit")) {
-            System.out.println("\nEnter command (add, view, update, remove, exit):");
+            System.out.println("\nEnter command (stock, expired, add, view, update, remove, exit):");
             input = scanner.nextLine();
 
             Command command = commands.get(input.toLowerCase());

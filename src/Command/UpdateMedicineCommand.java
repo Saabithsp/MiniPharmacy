@@ -28,7 +28,7 @@ public class UpdateMedicineCommand implements Command {
 
         boolean done = false;
         while (!done) {
-            System.out.println("\nSelect what to update:");
+            System.out.println("\nSelect what to update:(Enter the number)");
             System.out.println("1. Name");
             System.out.println("2. Quantity");
             System.out.println("3. Price");

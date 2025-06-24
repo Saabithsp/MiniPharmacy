@@ -75,4 +75,11 @@ public class Inventory {
     public Collection<Medicine> getAllMedicines() {
         return medicines.values();
     }
+    
+    public void filterAndDisplay(MedicineFilter filter) {
+        medicines.values().stream()
+                 .filter(filter::test)
+                 .forEach(System.out::println);
+    }
+
 }
