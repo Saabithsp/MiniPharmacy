@@ -10,7 +10,6 @@ public class PharmacyController {
 
     public PharmacyController() {
         commands = new HashMap<>();
-        scanner = new Scanner(System.in);
     }
 
     // Method to register commands
@@ -19,11 +18,22 @@ public class PharmacyController {
     }
 
     // Main loop to take user input and execute commands
-    public void start() {
+    public void start(Scanner scanner) {
         String input = "";
 
         while (!input.equalsIgnoreCase("exit")) {
-            System.out.println("\nEnter command (add, view, update, remove, exit):");
+        	System.out.println(
+        		    "\nSelect an option:\n" +
+        		    "  view    - View details of an item\n" +
+        		    "  stock   - View items currently in stock\n" +
+        		    "  expired - List expired items\n" +
+        		    "  add     - Add a new item\n" +
+        		    "  update  - Update an existing item\n" +
+        		    "  remove  - Remove an item\n" +
+        		    "  exit    - Exit the application\n" +
+        		    "Your choice: "
+        		);
+
             input = scanner.nextLine();
 
             Command command = commands.get(input.toLowerCase());
@@ -35,6 +45,5 @@ public class PharmacyController {
         }
 
         System.out.println("###################### THANK YOU FOR USING THE PHARMACY SYSTEM. GOODBYE! ######################");
-        scanner.close();
     }
 }

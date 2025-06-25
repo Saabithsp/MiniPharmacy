@@ -21,20 +21,20 @@ public class Inventory {
         observers.add(observer);
     }
 
-    // Notify observers
+    // Notifying observers
     private void notifyObservers(String message) {
         for (InventoryObserver observer : observers) {
             observer.onInventoryChanged(message);
         }
     }
 
-    // Add a new medicine or update existing one
+    // Adding a new medicine or update existing one
     public void addMedicine(Medicine medicine) {
         medicines.put(medicine.getId(), medicine);
         notifyObservers("Added: " + medicine.getName());
     }
 
-    // Remove medicine by ID
+    // Removing medicine by ID
     public boolean removeMedicine(String id) {
         Medicine removed = medicines.remove(id);
         if (removed != null) {
@@ -44,12 +44,12 @@ public class Inventory {
         return false;
     }
 
-    // Get medicine by ID
+    // Getting medicine by ID
     public Medicine getMedicine(String id) {
         return medicines.get(id);
     }
 
-    // Update quantity for a medicine
+    // Updating quantity for a medicine
     public boolean updateQuantity(String id, int newQuantity) {
         Medicine med = medicines.get(id);
         if (med != null) {
@@ -60,7 +60,7 @@ public class Inventory {
         return false;
     }
 
-    // List all medicines (for direct console output)
+    // Listing all medicines (for direct console output)
     public void listMedicines() {
         if (medicines.isEmpty()) {
             System.out.println("Inventory is empty.");
@@ -71,7 +71,7 @@ public class Inventory {
         }
     }
 
-    // Return all medicines (for use in commands like ViewMedicineCommand)
+    // Returning all medicines
     public Collection<Medicine> getAllMedicines() {
         return medicines.values();
     }
