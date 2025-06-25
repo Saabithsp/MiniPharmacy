@@ -1,22 +1,23 @@
 package Command;
 
-import Model.Inventory;
-import Model.Medicine;
-
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import Model.Inventory;
+import Model.Medicine;
+
 public class AddMedicineCommand implements Command {
     private Inventory inventory;
+    private Scanner scanner;
 
-    public AddMedicineCommand(Inventory inventory) {
+    public AddMedicineCommand(Inventory inventory,Scanner scanner) {
         this.inventory = inventory;
+        this.scanner = scanner;
     }
 
     @Override
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
-
+    	
         System.out.print("Enter medicine ID: ");
         String id = scanner.nextLine();
 

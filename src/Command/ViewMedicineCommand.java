@@ -9,14 +9,15 @@ public class ViewMedicineCommand implements Command {
         this.inventory = inventory;
     }
 
-    @Override
     public void execute() {
         System.out.println("\n******************************* Inventory Items *******************************\n");
         if (inventory.getAllMedicines().isEmpty()) {
             System.out.println("No medicines available in inventory.\n");
         } else {
-            inventory.getAllMedicines().forEach(System.out::println);
+        	inventory.getAllMedicines().forEach(med -> 
+            System.out.printf("ID: %s | Name: %s | Qty: %d | Price: %.2f | Expiry: %s%n",
+                med.getId(), med.getName(), med.getQuantity(), med.getPrice(), med.getExpiryDate()));
         }
-        System.out.println("**********************************************************************************");
+        System.out.println("\n**********************************************************************************");
     }
 }

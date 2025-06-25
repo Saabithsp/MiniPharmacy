@@ -9,16 +9,17 @@ import java.util.Scanner;
 
 public class UpdateMedicineCommand implements Command {
     private Inventory inventory;
+    private Scanner scanner;
 
-    public UpdateMedicineCommand(Inventory inventory) {
+    public UpdateMedicineCommand(Inventory inventory, Scanner scanner) {
         this.inventory = inventory;
+        this.scanner = scanner;
     }
 
     @Override
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Enter Medicine ID to update: ");
-        String id = scanner.nextLine();
+        String id = scanner.nextLine().trim();
 
         Medicine med = inventory.getMedicine(id);
         if (med == null) {
@@ -36,11 +37,11 @@ public class UpdateMedicineCommand implements Command {
             System.out.println("5. Exit update");
             System.out.print("Choice: ");
 
-            String choice = scanner.nextLine();
+            String choice = scanner.nextLine().trim();
             switch (choice) {
                 case "1":
                     System.out.print("\nEnter new name: ");
-                    String newName = scanner.nextLine();
+                    String newName = scanner.nextLine().trim();
                     med.setName(newName);
                     System.out.println("Name updated.");
                     break;
@@ -48,7 +49,7 @@ public class UpdateMedicineCommand implements Command {
                 case "2":
                     while (true) {
                         System.out.print("\nEnter new quantity: ");
-                        String input = scanner.nextLine();
+                        String input = scanner.nextLine().trim();
                         try {
                             int newQuantity = Integer.parseInt(input);
                             if (newQuantity < 0) {
@@ -67,7 +68,7 @@ public class UpdateMedicineCommand implements Command {
                 case "3":
                     while (true) {
                         System.out.print("\nEnter new price: ");
-                        String input = scanner.nextLine();
+                        String input = scanner.nextLine().trim();
                         try {
                             double newPrice = Double.parseDouble(input);
                             if (newPrice < 0) {
@@ -86,7 +87,7 @@ public class UpdateMedicineCommand implements Command {
                 case "4":
                     while (true) {
                         System.out.print("\nEnter new expiry date (YYYY-MM-DD): ");
-                        String dateInput = scanner.nextLine();
+                        String dateInput = scanner.nextLine().trim();
                         try {
                             LocalDate newDate = LocalDate.parse(dateInput);
                             if (newDate.isBefore(LocalDate.now())) {

@@ -5,14 +5,15 @@ import java.util.Scanner;
 
 public class RemoveMedicineCommand implements Command {
     private Inventory inventory;
+    private Scanner scanner;
 
-    public RemoveMedicineCommand(Inventory inventory) {
+    public RemoveMedicineCommand(Inventory inventory, Scanner scanner) {
         this.inventory = inventory;
+        this.scanner = scanner;
     }
 
     @Override
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the Medicine ID to remove: ");
         String id = scanner.nextLine();
 
