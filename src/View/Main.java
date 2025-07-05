@@ -39,7 +39,7 @@ public class Main {
         ReflectionUtil.listCommandClasses();
 
         // Starting the system
-        System.out.println("\n\t********** 💊 Welcome to CureLens Mini Pharmacy System 💊 **********");
+        System.out.println("\n\t ********** 💊 Welcome to CureLens Mini Pharmacy System 💊 ********** ");
         controller.start(scanner);
 
         // Closing the scanner after system exits...

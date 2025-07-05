@@ -1,6 +1,7 @@
 package Command;
 
 import Model.Inventory;
+import Model.Medicine;
 import java.util.Scanner;
 
 public class RemoveMedicineCommand implements Command {
@@ -14,14 +15,37 @@ public class RemoveMedicineCommand implements Command {
 
     @Override
     public void execute() {
-        System.out.print("Enter the Medicine ID to remove: ");
-        String id = scanner.nextLine();
+        String id = promptMedicineId();
+        Medicine med = inventory.getMedicine(id);
+        boolean removed = false;
+        if (med != null) {
+            removed = removeMedicineById(id);
+        }
+        printResult(id, med, removed);
+    }
 
-        boolean removed = inventory.removeMedicine(id);
+    private String promptMedicineId() {
+        System.out.print("Enter the Medicine ID to remove: ");
+        return scanner.nextLine().trim();
+    }
+
+    private boolean removeMedicineById(String id) {
+        if (id.isEmpty()) {
+            System.out.println("Invalid ID entered. Please try again.");
+            return false;
+        }
+        return inventory.removeMedicine(id);
+    }
+
+    private void printResult(String id, Medicine med, boolean removed) {
         if (removed) {
-            System.out.println("Medicine with ID " + id + " removed successfully.");
+            System.out.println("\nMedicine with ID " + id + " '" + med.getName() + "' removed successfully.");
         } else {
-            System.out.println("Medicine with ID " + id + " not found.");
+            if (med == null) {
+                System.out.println("\nMedicine with ID " + id + " not found.");
+            } else {
+                System.out.println("\nFailed to remove medicine with ID " + id + " (" + med.getName() + ").");
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+
 package Command;
 
 import Model.Inventory;
@@ -14,9 +15,7 @@ public class ViewMedicineCommand implements Command {
         if (inventory.getAllMedicines().isEmpty()) {
             System.out.println("No medicines available in inventory.\n");
         } else {
-        	inventory.getAllMedicines().forEach(med -> 
-            System.out.printf("ID: %s | Name: %s | Qty: %d | Price: %.2f | Expiry: %s%n",
-                med.getId(), med.getName(), med.getQuantity(), med.getPrice(), med.getExpiryDate()));
+            inventory.getAllMedicines().forEach(System.out::println);
         }
         System.out.println("\n**********************************************************************************");
     }

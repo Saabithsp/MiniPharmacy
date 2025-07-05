@@ -29,20 +29,20 @@ public class UpdateMedicineCommand implements Command {
 
         boolean done = false;
         while (!done) {
-            System.out.println("\nSelect what to update (Enter the number):");
-            System.out.println("1. Name");
-            System.out.println("2. Quantity");
-            System.out.println("3. Price");
-            System.out.println("4. Expiry Date (YYYY-MM-DD)");
-            System.out.println("5. Exit update");
-            System.out.print("Choice: ");
+            System.out.print("\nSelect what to update (Enter the number):\n"
+                + "1. Name\n"
+                + "2. Quantity\n"
+                + "3. Price\n"
+                + "4. Expiry Date (YYYY-MM-DD)\n"
+                + "5. Exit update\n"
+                + "Choice: ");
 
             String choice = scanner.nextLine().trim();
             switch (choice) {
                 case "1":
                     System.out.print("\nEnter new name: ");
                     String newName = scanner.nextLine().trim();
-                    med.setName(newName);
+                    inventory.updateName(id, newName);
                     System.out.println("Name updated.");
                     break;
 
@@ -56,7 +56,7 @@ public class UpdateMedicineCommand implements Command {
                                 System.out.println("Quantity cannot be negative. Try again.");
                                 continue;
                             }
-                            med.setQuantity(newQuantity);
+                            inventory.updateQuantity(id, newQuantity);
                             System.out.println("Quantity updated.");
                             break;
                         } catch (NumberFormatException e) {
@@ -75,7 +75,7 @@ public class UpdateMedicineCommand implements Command {
                                 System.out.println("Price cannot be negative. Try again.");
                                 continue;
                             }
-                            med.setPrice(newPrice);
+                            inventory.updatePrice(id, newPrice);
                             System.out.println("Price updated.");
                             break;
                         } catch (NumberFormatException e) {
@@ -94,7 +94,7 @@ public class UpdateMedicineCommand implements Command {
                                 System.out.println("Expiry date cannot be in the past. Please enter a valid date.");
                                 continue;
                             }
-                            med.setExpiryDate(newDate);
+                            inventory.updateExpiryDate(id, newDate);
                             System.out.println("Expiry date updated.");
                             break;
                         } catch (DateTimeParseException e) {
@@ -114,3 +114,6 @@ public class UpdateMedicineCommand implements Command {
         }
     }
 }
+
+
+

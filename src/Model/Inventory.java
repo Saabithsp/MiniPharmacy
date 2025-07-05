@@ -2,6 +2,7 @@ package Model;
 
 import Observer.InventoryObserver;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,6 +28,12 @@ public class Inventory {
             observer.onInventoryChanged(message);
         }
     }
+    
+    // Getting medicine by ID
+    public Medicine getMedicine(String id) {
+        return medicines.get(id);
+    }
+    
 
     // Adding a new medicine or update existing one
     public void addMedicine(Medicine medicine) {
@@ -36,6 +43,10 @@ public class Inventory {
 
     // Removing medicine by ID
     public boolean removeMedicine(String id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Medicine ID cannot be null");
+        }
+
         Medicine removed = medicines.remove(id);
         if (removed != null) {
             notifyObservers("Removed: " + removed.getName());
@@ -44,12 +55,19 @@ public class Inventory {
         return false;
     }
 
-    // Getting medicine by ID
-    public Medicine getMedicine(String id) {
-        return medicines.get(id);
+    
+ // Update medicine name
+    public boolean updateName(String id, String newName) {
+        Medicine med = medicines.get(id);
+        if (med != null) {
+            med.setName(newName);
+            notifyObservers("Updated name for: " + med.getId() + " to " + newName);
+            return true;
+        }
+        return false;
     }
 
-    // Updating quantity for a medicine
+    // Update medicine quantity
     public boolean updateQuantity(String id, int newQuantity) {
         Medicine med = medicines.get(id);
         if (med != null) {
@@ -60,7 +78,29 @@ public class Inventory {
         return false;
     }
 
-    // Listing all medicines (for direct console output)
+    // Update medicine price
+    public boolean updatePrice(String id, double newPrice) {
+        Medicine med = medicines.get(id);
+        if (med != null) {
+            med.setPrice(newPrice);
+            notifyObservers("Updated price for: " + med.getName() + " to LKR " + String.format("%.2f", newPrice));
+            return true;
+        }
+        return false;
+    }
+
+    // Update medicine expiry date
+    public boolean updateExpiryDate(String id, LocalDate newDate) {
+        Medicine med = medicines.get(id);
+        if (med != null) {
+            med.setExpiryDate(newDate);
+            notifyObservers("Updated expiry date for: " + med.getName() + " to " + newDate);
+            return true;
+        }
+        return false;
+    }
+
+    // Listing all medicines 
     public void listMedicines() {
         if (medicines.isEmpty()) {
             System.out.println("Inventory is empty.");
